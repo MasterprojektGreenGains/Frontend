@@ -4,7 +4,7 @@ import { DatePicker as Datepicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from 'dayjs';
 
 type Props = {
-    label: String,
+    label: string,
     date: Dayjs | null | undefined,
     setDate: (date: Dayjs | null | undefined) => void;
 }

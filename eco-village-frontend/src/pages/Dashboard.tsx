@@ -9,7 +9,7 @@ import Button from "../components/Button";
 
 const Dashboard = () => {
   const [activeToggleDate, setActiveToggleDate] =
-    React.useState<String>("lastday");
+    React.useState<string>("lastday");
   const [fromDate, setFromDate] = React.useState<Dayjs | null | undefined>();
   const [toDate, setToDate] = React.useState<Dayjs | null | undefined>();
 

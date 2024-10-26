@@ -1,12 +1,13 @@
 import { default as MuiButton } from "@mui/material/Button";
 
 type Props = {
-  children: String;
+  children: string;
   onClick?: () => void;
   variant?: "text" | "outlined" | "contained";
   disabled?: boolean;
   color?: "primary" | "secondary"
-  size?: "small" | "medium" | "large"
+  size?: "small" | "medium" | "large",
+  className?: string;
 };
 
 const Button = ({
@@ -16,6 +17,7 @@ const Button = ({
   disabled,
   color,
   size,
+  className
 }: Props) => {
   return (
     <>
@@ -27,6 +29,7 @@ const Button = ({
         size={size}
         sx={{textTransform: "none"}}
         disableRipple
+        className={className}
       >
         {children}
       </MuiButton>
