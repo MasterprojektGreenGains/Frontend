@@ -4,22 +4,17 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 type Props = {
   activeToggleDate: String;
   setActiveToggleDate: (value: String) => void;
+  disabled?: boolean
 };
 
-const DateToggle = ({ activeToggleDate, setActiveToggleDate }: Props) => {
-  const handleToggleDate = (
-    event: React.MouseEvent<HTMLElement>,
-    activeDate: String
-  ) => {
-    setActiveToggleDate(activeDate);
-  };
-
+const DateToggle = ({ activeToggleDate, setActiveToggleDate, disabled }: Props) => {
   return (
     <>
       <ToggleButtonGroup
         value={activeToggleDate}
         exclusive
-        onChange={handleToggleDate}
+        onChange={(event: React.MouseEvent<HTMLElement>, activeDate: String) => setActiveToggleDate(activeDate)}
+        disabled={disabled}
         aria-label="time selection"
       >
         <ToggleButton value="lastday" aria-label="last day">
