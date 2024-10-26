@@ -33,8 +33,10 @@ const Dashboard = () => {
   };
 
   const handleOpenEcoVillageClick = () => {
-    alert("opening EcoVillage")
+    alert("opening EcoVillage");
   };
+
+  const areDatesSet = fromDate !== undefined || toDate !== undefined;
 
   return (
     <>
@@ -42,19 +44,11 @@ const Dashboard = () => {
         <div className="text-3xl">Dashboard</div>
       </Link>
 
-      {(fromDate !== null && fromDate !== undefined) ||
-      (toDate !== null && toDate !== undefined) ? (
-        <DateToggle
-          activeToggleDate={activeToggleDate}
-          setActiveToggleDate={setActiveToggleDate}
-          disabled
-        />
-      ) : (
-        <DateToggle
-          activeToggleDate={activeToggleDate}
-          setActiveToggleDate={setActiveToggleDate}
-        />
-      )}
+      <DateToggle
+        activeToggleDate={activeToggleDate}
+        setActiveToggleDate={setActiveToggleDate}
+        disabled={areDatesSet}
+      />
 
       <div className="text-3xl font-semibold">
         <EnergyDisplayInKWh seriesDataInWatts={seriesDataInWatts} />
@@ -70,19 +64,22 @@ const Dashboard = () => {
       <DatePicker label={"From Date"} date={fromDate} setDate={setFromDate} />
       <DatePicker label={"To Date"} date={toDate} setDate={setToDate} />
 
-      {(fromDate !== null && fromDate !== undefined) ||
-      (toDate !== null && toDate !== undefined) ? (
-        <Button onClick={handleResetClick} variant="contained">
-          Reset
-        </Button>
-      ) : (
-        <Button onClick={handleResetClick} variant="contained" disabled>
-          Reset
-        </Button>
-      )}
+      <Button
+        onClick={handleResetClick}
+        color={"secondary"}
+        variant="contained"
+        disabled={!areDatesSet}
+      >
+        Reset
+      </Button>
 
       <div>
-        <Button color={"success"} variant={"contained"} onClick={handleOpenEcoVillageClick}>
+        <Button
+          color={"primary"}
+          variant={"contained"}
+          size={"large"}
+          onClick={handleOpenEcoVillageClick}
+        >
           Open EcoVillage
         </Button>
       </div>

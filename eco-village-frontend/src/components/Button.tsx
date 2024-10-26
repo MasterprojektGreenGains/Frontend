@@ -5,8 +5,8 @@ type Props = {
   onClick?: () => void;
   variant?: "text" | "outlined" | "contained";
   disabled?: boolean;
-  color?: "success" | "secondary" | "error";
-  size?: "small" | "medium" | "large";
+  color?: "primary" | "secondary"
+  size?: "small" | "medium" | "large"
 };
 
 const Button = ({
@@ -25,6 +25,8 @@ const Button = ({
         disabled={disabled}
         color={color}
         size={size}
+        sx={{textTransform: "none"}}
+        disableRipple
       >
         {children}
       </MuiButton>
