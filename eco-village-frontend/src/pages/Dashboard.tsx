@@ -7,6 +7,8 @@ import DatePicker from "../components/DatePicker";
 import { Dayjs } from "dayjs";
 import Button from "../components/Button";
 import Box from "@mui/material/Box";
+import Icon from "../components/Icon";
+import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 
 const Dashboard = () => {
   const [activeToggleDate, setActiveToggleDate] =
@@ -37,17 +39,25 @@ const Dashboard = () => {
     alert("opening EcoVillage");
   };
 
+  const handleMissionsClick = () => {
+    alert("opening Missions");
+  };
+
+  const handleStoreClick = () => {
+    alert("opening Store");
+  };
+
   const areDatesSet = fromDate !== undefined || toDate !== undefined;
 
   return (
     <>
-      <Box className="text-3xl pb-4">
+      <Box className={"text-3xl pb-4"}>
         <Link to="/dashboard">Dashboard</Link>
       </Box>
 
-      <Box className="flex">
-        <Box className="w-2/3">
-          <div className="py-4">
+      <Box className={"flex"}>
+        <Box className={"w-2/3"}>
+          <div className={"py-4"}>
             <DateToggle
               activeToggleDate={activeToggleDate}
               setActiveToggleDate={setActiveToggleDate}
@@ -55,8 +65,8 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="pt-4">
-            <div className="pl-2 text-4xl font-semibold">
+          <div className={"pt-4"}>
+            <div className={"pl-2 text-4xl font-semibold"}>
               <EnergyDisplayInKWh seriesDataInWatts={seriesDataInWatts} />
             </div>
 
@@ -68,12 +78,12 @@ const Dashboard = () => {
           </div>
         </Box>
 
-        <Box className="w-1/3 mt-4 p-2 bg-slate-100">
+        <Box className={"w-1/3 mt-4 p-2 bg-slate-100"}>
           <div>Widget (Picture) Area</div>
         </Box>
       </Box>
 
-      <Box className="flex justify-start mt-4">
+      <Box className={"flex justify-start mt-4"}>
         <div>
           <DatePicker
             label={"From Date"}
@@ -82,13 +92,13 @@ const Dashboard = () => {
           />
         </div>
 
-        <div className="pl-4">
+        <div className={"pl-4"}>
           <DatePicker label={"To Date"} date={toDate} setDate={setToDate} />
         </div>
 
-        <div className="flex pl-4 justify-start items-center">
+        <div className={"flex pl-4 justify-start items-center"}>
           <Button
-            className="h-fit w-24"
+            className={"h-fit w-24"}
             color={"secondary"}
             variant="contained"
             onClick={handleResetClick}
@@ -99,17 +109,48 @@ const Dashboard = () => {
         </div>
       </Box>
 
-      <div className="mt-16">
-        <Button
-          className="w-1/3"
-          color={"primary"}
-          variant={"contained"}
-          size={"large"}
-          onClick={handleOpenEcoVillageClick}
-        >
-          Open EcoVillage
-        </Button>
-      </div>
+      <Box className={"flex mt-16"}>
+        <Box className={"flex w-2/3 bg-red-200"}>
+          <Button
+            className={"w-full"}
+            color={"primary"}
+            variant={"contained"}
+            size={"large"}
+            onClick={handleOpenEcoVillageClick}
+          >
+            Open EcoVillage
+          </Button>
+        </Box>
+
+        <Box className={"flex justify-end w-1/3"}>
+          <div className={"mr-4"}>
+            <Button
+              color={"secondary"}
+              variant={"contained"}
+              size={"large"}
+              onClick={handleMissionsClick}
+            >
+              Missions
+            </Button>
+          </div>
+
+          <div className={"mr-6"}>
+            <Button
+              color={"secondary"}
+              variant={"contained"}
+              size={"large"}
+              onClick={handleStoreClick}
+            >
+              Store
+            </Button>
+          </div>
+
+          <div className={"flex items-center"}>
+            <Icon icon={LocalFloristIcon} size={"large"} />
+            <div className={"flex pl-2 font-semibold text-lg"}>60</div>
+          </div>
+        </Box>
+      </Box>
     </>
   );
 };
