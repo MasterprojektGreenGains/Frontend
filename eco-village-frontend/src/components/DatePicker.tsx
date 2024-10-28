@@ -6,14 +6,15 @@ import { Dayjs } from 'dayjs';
 type Props = {
     label: string,
     date: Dayjs | null | undefined,
-    setDate: (date: Dayjs | null | undefined) => void;
+    setDate: (date: Dayjs | null | undefined) => void,
+    className?: string;
 }
 
-const DatePicker = ({label, date, setDate}: Props) => {
+const DatePicker = ({label, date, setDate, className}: Props) => {
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Datepicker label={label} value={date} onChange={(date) => setDate(date)}/>
+                <Datepicker label={label} value={date} onChange={(date) => setDate(date)} className={className}/>
             </LocalizationProvider>
         </>
     )

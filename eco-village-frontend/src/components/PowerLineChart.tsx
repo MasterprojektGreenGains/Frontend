@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 type Props = {
     xAxisData: Date[],
     seriesDataInWatts: number[],
-    width: number,
-    height: number
+    width?: number,
+    height?: number
 };
 
 const PowerLineChart = ({xAxisData, seriesDataInWatts, width, height}: Props) => {

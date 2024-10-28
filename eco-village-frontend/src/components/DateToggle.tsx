@@ -11,6 +11,7 @@ const DateToggle = ({ activeToggleDate, setActiveToggleDate, disabled }: Props) 
   return (
     <>
       <ToggleButtonGroup
+        color="primary"
         value={activeToggleDate}
         exclusive
         onChange={(event: React.MouseEvent<HTMLElement>, activeDate: string) => setActiveToggleDate(activeDate)}

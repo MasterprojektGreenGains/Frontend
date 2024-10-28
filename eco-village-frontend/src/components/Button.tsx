@@ -1,7 +1,7 @@
 import { default as MuiButton } from "@mui/material/Button";
 
 type Props = {
-  children: string;
+  children: React.ReactNode;
   onClick?: () => void;
   variant?: "text" | "outlined" | "contained";
   disabled?: boolean;
