@@ -24,6 +24,16 @@ const ClassicTheme = createTheme({
           },
         },
       },
+      MuiIconButton: {
+        styleOverrides: {
+          colorPrimary: {
+            color: "black"
+          },
+          colorSecondary: {
+            color: "#1976d2"
+          }
+        }
+      }
     },
   });
 

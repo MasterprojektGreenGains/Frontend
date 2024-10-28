@@ -7,8 +7,9 @@ import DatePicker from "../components/DatePicker";
 import { Dayjs } from "dayjs";
 import Button from "../components/Button";
 import Box from "@mui/material/Box";
-import Icon from "../components/Icon";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
+import DrawerRight from "../components/DrawerRight";
+import IconButton from "@mui/material/IconButton";
 
 const Dashboard = () => {
   const [activeToggleDate, setActiveToggleDate] =
@@ -51,8 +52,15 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box className={"text-3xl pb-4"}>
-        <Link to="/dashboard">Dashboard</Link>
+      <Box className={"flex"}>
+        <div className={"w-1/2 flex justify-start"}>
+          <Link className={"text-3xl pb-4"} to="/dashboard">
+            Dashboard
+          </Link>
+        </div>
+        <div className={"w-1/2 flex justify-end "}>
+          <DrawerRight />
+        </div>
       </Box>
 
       <Box className={"flex"}>
@@ -146,8 +154,10 @@ const Dashboard = () => {
           </div>
 
           <div className={"flex items-center"}>
-            <Icon icon={LocalFloristIcon} size={"large"} />
-            <div className={"flex pl-2 font-semibold text-lg"}>60</div>
+            <IconButton color="primary" disableRipple sx={{ cursor: 'default' }}>
+              <LocalFloristIcon fontSize="large"/>
+            </IconButton>
+            <div className={"flex font-semibold text-lg"}>60</div>
           </div>
         </Box>
       </Box>
