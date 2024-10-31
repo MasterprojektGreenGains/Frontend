@@ -9,13 +9,16 @@ import Button from "../components/Button";
 import Box from "@mui/material/Box";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import DrawerRight from "../components/DrawerRight";
-import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
+import PageContainer from "../components/PageContainer";
+import MuiIconButtonWithText from "../components/MuiIconButtonWithText";
 
 const Dashboard = () => {
   const [activeToggleDate, setActiveToggleDate] =
     React.useState<string>("lastday");
   const [fromDate, setFromDate] = React.useState<Dayjs | null | undefined>();
   const [toDate, setToDate] = React.useState<Dayjs | null | undefined>();
+  const navigate = useNavigate();
 
   const xAxisData: Date[] = [
     new Date("2023-12-04T08:00:00"),
@@ -37,7 +40,7 @@ const Dashboard = () => {
   };
 
   const handleOpenEcoVillageClick = () => {
-    alert("opening EcoVillage");
+    navigate("/ecovillage");
   };
 
   const handleMissionsClick = () => {
@@ -51,7 +54,7 @@ const Dashboard = () => {
   const areDatesSet = fromDate !== undefined || toDate !== undefined;
 
   return (
-    <>
+    <PageContainer>
       <Box className={"flex"}>
         <div className={"w-1/2 flex justify-start"}>
           <Link className={"text-3xl pb-4"} to="/dashboard">
@@ -153,15 +156,16 @@ const Dashboard = () => {
             </Button>
           </div>
 
-          <div className={"flex items-center"}>
-            <IconButton color="primary" disableRipple sx={{ cursor: 'default' }}>
-              <LocalFloristIcon fontSize="large"/>
-            </IconButton>
-            <div className={"flex font-semibold text-lg"}>60</div>
-          </div>
+          <MuiIconButtonWithText
+            icon={LocalFloristIcon}
+            text={"60"}
+            fontSize="large"
+            className="font-semibold text-xl"
+            sx={{ cursor: "default" }}
+          />
         </Box>
       </Box>
-    </>
+    </PageContainer>
   );
 };
 
