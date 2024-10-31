@@ -18,7 +18,7 @@ const IconButtonWithText = ({
 }: Props) => {
   return (
     <div className={"flex items-center"}>
-      <IconButton color={color} disableRipple size="large" sx={sx}>
+      <IconButton color={color} disableRipple sx={sx}>
         {icon}
       </IconButton>
       <div className={className}>{text}</div>

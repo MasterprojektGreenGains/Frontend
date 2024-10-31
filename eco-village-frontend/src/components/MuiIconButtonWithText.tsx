@@ -20,7 +20,7 @@ const MuiIconButtonWithText = ({
 }: Props) => {
   return (
     <div className={"flex items-center"}>
-      <IconButton color={color} disableRipple size="large" sx={sx} >
+      <IconButton color={color} disableRipple sx={sx} >
         <IconComponent fontSize={fontSize}/>
       </IconButton>
       <div className={className}>{text}</div>

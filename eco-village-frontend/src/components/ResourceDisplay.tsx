@@ -9,13 +9,11 @@ import MuiIconButtonWithText from "./MuiIconButtonWithText";
 
 type Props = {
   coins: string,
+  coinStorageCapacity: string,
   energy: string,
   ecoCredits: string,
   villages: string,
   population: string,
-
-
-  coinStorageCapacity: string;
 };
 
 const ResourceDisplay = ({ coins, coinStorageCapacity, energy, ecoCredits, villages, population }: Props) => {
