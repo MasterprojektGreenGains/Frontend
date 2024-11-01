@@ -10,7 +10,7 @@ type Props = {
   className?: string;
 };
 
-const MuiIconButtonWithText = ({
+const MuiIconButtonWithLabel = ({
   icon: IconComponent,
   text,
   color = "primary",
@@ -28,4 +28,4 @@ const MuiIconButtonWithText = ({
   );
 };
 
-export default MuiIconButtonWithText;
+export default MuiIconButtonWithLabel;

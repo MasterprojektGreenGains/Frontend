@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 
-const IconButtonWithText = ({
+const IconButtonWithLabel = ({
   icon,
   text,
   color = "primary",
@@ -26,4 +26,4 @@ const IconButtonWithText = ({
   );
 };
 
-export default IconButtonWithText;
+export default IconButtonWithLabel;

@@ -11,13 +11,13 @@ import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import DrawerRight from "../components/DrawerRight";
 import { useNavigate } from "react-router-dom";
 import PageContainer from "../components/PageContainer";
-import MuiIconButtonWithText from "../components/MuiIconButtonWithText";
+import MuiIconButtonWithLabel from "../components/MuiIconButtonWithLabel";
+import { useState } from "react";
 
 const Dashboard = () => {
-  const [activeToggleDate, setActiveToggleDate] =
-    React.useState<string>("lastday");
-  const [fromDate, setFromDate] = React.useState<Dayjs | null | undefined>();
-  const [toDate, setToDate] = React.useState<Dayjs | null | undefined>();
+  const [activeToggleDate, setActiveToggleDate] = useState<string>("lastday");
+  const [fromDate, setFromDate] = useState<Dayjs | null | undefined>();
+  const [toDate, setToDate] = useState<Dayjs | null | undefined>();
   const navigate = useNavigate();
 
   const xAxisData: Date[] = [
@@ -33,23 +33,6 @@ const Dashboard = () => {
   const seriesDataInWatts: number[] = [
     2000, 2100, 2500, 2800, 3200, 2500, 1800,
   ];
-
-  const handleResetClick = () => {
-    setFromDate(undefined);
-    setToDate(undefined);
-  };
-
-  const handleOpenEcoVillageClick = () => {
-    navigate("/ecovillage");
-  };
-
-  const handleMissionsClick = () => {
-    alert("opening Missions");
-  };
-
-  const handleStoreClick = () => {
-    alert("opening Store");
-  };
 
   const areDatesSet = fromDate !== undefined || toDate !== undefined;
 
@@ -112,7 +95,10 @@ const Dashboard = () => {
             className={"h-fit w-24"}
             color={"secondary"}
             variant="contained"
-            onClick={handleResetClick}
+            onClick={() => {
+              setFromDate(undefined);
+              setToDate(undefined);
+            }}
             disabled={!areDatesSet}
           >
             Reset
@@ -127,7 +113,7 @@ const Dashboard = () => {
             color={"primary"}
             variant={"contained"}
             size={"large"}
-            onClick={handleOpenEcoVillageClick}
+            onClick={() => navigate("/ecovillage")}
           >
             Open EcoVillage
           </Button>
@@ -139,7 +125,7 @@ const Dashboard = () => {
               color={"secondary"}
               variant={"contained"}
               size={"large"}
-              onClick={handleMissionsClick}
+              onClick={() => alert("opening missions")}
             >
               Missions
             </Button>
@@ -150,13 +136,13 @@ const Dashboard = () => {
               color={"secondary"}
               variant={"contained"}
               size={"large"}
-              onClick={handleStoreClick}
+              onClick={() => alert("opening store")}
             >
               Store
             </Button>
           </div>
 
-          <MuiIconButtonWithText
+          <MuiIconButtonWithLabel
             icon={LocalFloristIcon}
             text={"60"}
             fontSize="large"

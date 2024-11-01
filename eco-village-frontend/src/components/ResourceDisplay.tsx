@@ -4,8 +4,8 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import HouseIcon from "@mui/icons-material/House";
 import PeopleIcon from "@mui/icons-material/People";
-import IconButtonWithText from "./IconButtonWithText";
-import MuiIconButtonWithText from "./MuiIconButtonWithText";
+import IconButtonWithLabel from "./IconButtonWithLabel";
+import MuiIconButtonWithLabel from "./MuiIconButtonWithLabel";
 
 type Props = {
   coins: string,
@@ -14,36 +14,37 @@ type Props = {
   ecoCredits: string,
   villages: string,
   population: string,
+  className?: string
 };
 
-const ResourceDisplay = ({ coins, coinStorageCapacity, energy, ecoCredits, villages, population }: Props) => {
+const ResourceDisplay = ({ coins, coinStorageCapacity, energy, ecoCredits, villages, population, className}: Props) => {
   return (
-    <Box className="flex justify-around w-1/2">
-      <IconButtonWithText
+    <Box className={className}>
+      <IconButtonWithLabel
         icon={<CoinIcon width="20" height="20" />}
         text={`${coins}/${coinStorageCapacity}`}
         sx={{ cursor: "default" }}
       />
 
-      <MuiIconButtonWithText
+      <MuiIconButtonWithLabel
         icon={WbSunnyIcon}
         text={energy}
         sx={{ cursor: "default" }}
       />
 
-      <MuiIconButtonWithText
+      <MuiIconButtonWithLabel
         icon={LocalFloristIcon}
         text={ecoCredits}
         sx={{ cursor: "default" }}
       />
 
-      <MuiIconButtonWithText
+      <MuiIconButtonWithLabel
         icon={HouseIcon}
         text={villages}
         sx={{ cursor: "default" }}
       />
 
-      <MuiIconButtonWithText
+      <MuiIconButtonWithLabel
         icon={PeopleIcon}
         text={population}
         sx={{ cursor: "default" }}
