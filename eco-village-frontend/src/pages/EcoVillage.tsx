@@ -5,6 +5,7 @@ import { Box, IconButton } from "@mui/material";
 import VillageNameEditor from "../components/VillageNameEditor";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import VillageView from "../components/VillageView";
 
 const EcoVillage = () => {
   const [villageName, setVillageName] = useState("Village 1");
@@ -21,7 +22,7 @@ const EcoVillage = () => {
         population={"315"}
       />
 
-      <Box className={"flex mt-12 w-1/2 justify-between"}>
+      <Box className={"flex w-1/2 mt-8 justify-between"}>
         <div>
           <VillageNameEditor
             villageName={villageName}
@@ -31,17 +32,25 @@ const EcoVillage = () => {
 
         <Box className={"flex"}>
           <div>
-            <IconButton color={"secondary"} onClick={() => alert("opening store")}>
+            <IconButton
+              color={"secondary"}
+              onClick={() => alert("opening store")}
+            >
               <ShoppingBagIcon />
             </IconButton>
           </div>
-
           <div>
-            <IconButton color={"secondary"} onClick={() => alert("opening notifications")}>
+            <IconButton
+              color={"secondary"}
+              onClick={() => alert("opening notifications")}
+            >
               <NotificationsIcon />
             </IconButton>
           </div>
         </Box>
+      </Box>
+      <Box className={"flex w-1/2"}>
+        <VillageView />
       </Box>
     </PageContainer>
   );
