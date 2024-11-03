@@ -1,10 +1,11 @@
 export type Field = {
     id: string,
-    dimensions: FieldDimensions,
+    dimensions?: FieldDimensions,
     building?: Building
 }
 
 export type FieldDimensions = {
+    fieldId?: string,
     x: number,
     y: number,
     w: number,
