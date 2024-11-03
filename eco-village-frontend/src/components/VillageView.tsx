@@ -114,7 +114,7 @@ const VillageView = ({ fields, setFields }: Props) => {
                 dimensions.w,
                 dimensions.h
               )}
-              className="cursor-pointer"
+              className="cursor-pointer z-10"
             />
           )
         );
