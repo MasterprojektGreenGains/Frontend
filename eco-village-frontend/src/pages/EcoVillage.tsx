@@ -11,65 +11,23 @@ import { Field } from "../types/Types";
 const EcoVillage = () => {
   const [villageName, setVillageName] = useState("Village 1");
   const [fields, setFields] = useState<Field[]>([
-    {
-      id: "centerField",
-      building: { type: "ecoCommandCenter", level: 1 },
-    },
-    {
-      id: "field 1",
-    },
-    {
-      id: "field 2",
-    },
-    {
-      id: "field 3",
-      building: { type: "windTurbine", level: 3}
-    },
-    {
-      id: "field 4",
-      building: { type: "windTurbine", level: 4}
-    },
-    {
-      id: "field 5",
-    },
-    {
-      id: "field 6",
-    },
-    {
-      id: "field 7",
-      building: { type: "windTurbine", level: 1 },
-    },
-    {
-      id: "field 8",
-      building: { type: "windTurbine", level: 2 },
-    },
-    {
-      id: "field 9",
-      building: { type: "house", level: 1 },
-    },
-    {
-      id: "field 10",
-      building: { type: "house", level: 3 },
-    },
-    {
-      id: "field 11",
-
-    },
-    {
-      id: "field 12",
-    },
-    {
-      id: "field 13",
-    },
-    {
-      id: "field 14",
-    },
-    {
-      id: "field 15",
-    },
-    {
-      id: "field 16",
-    },
+    { id: "centerField", building: { type: "ecoCommandCenter", level: 1 } },
+    { id: "field 1" },
+    { id: "field 2" },
+    { id: "field 3", building: { type: "house", level: 2 } },
+    { id: "field 4", building: { type: "windTurbine", level: 4 } },
+    { id: "field 5" },
+    { id: "field 6" },
+    { id: "field 7", building: { type: "windTurbine", level: 1 } },
+    { id: "field 8", building: { type: "windTurbine", level: 2 } },
+    { id: "field 9", building: { type: "house", level: 1 } },
+    { id: "field 10", building: { type: "house", level: 3 } },
+    { id: "field 11" },
+    { id: "field 12" },
+    { id: "field 13" },
+    { id: "field 14" },
+    { id: "field 15" },
+    { id: "field 16" },
   ]);
 
   return (
