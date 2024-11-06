@@ -9,13 +9,16 @@ import Button from "../components/Button";
 import Box from "@mui/material/Box";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import DrawerRight from "../components/DrawerRight";
-import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
+import PageContainer from "../components/PageContainer";
+import MuiIconButtonWithLabel from "../components/MuiIconButtonWithLabel";
+import { useState } from "react";
 
 const Dashboard = () => {
-  const [activeToggleDate, setActiveToggleDate] =
-    React.useState<string>("lastday");
-  const [fromDate, setFromDate] = React.useState<Dayjs | null | undefined>();
-  const [toDate, setToDate] = React.useState<Dayjs | null | undefined>();
+  const [activeToggleDate, setActiveToggleDate] = useState<string>("lastday");
+  const [fromDate, setFromDate] = useState<Dayjs | null | undefined>();
+  const [toDate, setToDate] = useState<Dayjs | null | undefined>();
+  const navigate = useNavigate();
 
   const xAxisData: Date[] = [
     new Date("2023-12-04T08:00:00"),
@@ -31,27 +34,10 @@ const Dashboard = () => {
     2000, 2100, 2500, 2800, 3200, 2500, 1800,
   ];
 
-  const handleResetClick = () => {
-    setFromDate(undefined);
-    setToDate(undefined);
-  };
-
-  const handleOpenEcoVillageClick = () => {
-    alert("opening EcoVillage");
-  };
-
-  const handleMissionsClick = () => {
-    alert("opening Missions");
-  };
-
-  const handleStoreClick = () => {
-    alert("opening Store");
-  };
-
   const areDatesSet = fromDate !== undefined || toDate !== undefined;
 
   return (
-    <>
+    <PageContainer>
       <Box className={"flex"}>
         <div className={"w-1/2 flex justify-start"}>
           <Link className={"text-3xl pb-4"} to="/dashboard">
@@ -109,7 +95,10 @@ const Dashboard = () => {
             className={"h-fit w-24"}
             color={"secondary"}
             variant="contained"
-            onClick={handleResetClick}
+            onClick={() => {
+              setFromDate(undefined);
+              setToDate(undefined);
+            }}
             disabled={!areDatesSet}
           >
             Reset
@@ -118,13 +107,13 @@ const Dashboard = () => {
       </Box>
 
       <Box className={"flex mt-16"}>
-        <Box className={"flex w-2/3 bg-red-200"}>
+        <Box className={"flex w-2/3"}>
           <Button
             className={"w-full"}
             color={"primary"}
             variant={"contained"}
             size={"large"}
-            onClick={handleOpenEcoVillageClick}
+            onClick={() => navigate("/ecovillage")}
           >
             Open EcoVillage
           </Button>
@@ -136,7 +125,7 @@ const Dashboard = () => {
               color={"secondary"}
               variant={"contained"}
               size={"large"}
-              onClick={handleMissionsClick}
+              onClick={() => alert("opening missions")}
             >
               Missions
             </Button>
@@ -147,21 +136,22 @@ const Dashboard = () => {
               color={"secondary"}
               variant={"contained"}
               size={"large"}
-              onClick={handleStoreClick}
+              onClick={() => alert("opening store")}
             >
               Store
             </Button>
           </div>
 
-          <div className={"flex items-center"}>
-            <IconButton color="primary" disableRipple sx={{ cursor: 'default' }}>
-              <LocalFloristIcon fontSize="large"/>
-            </IconButton>
-            <div className={"flex font-semibold text-lg"}>60</div>
-          </div>
+          <MuiIconButtonWithLabel
+            icon={LocalFloristIcon}
+            text={"60"}
+            fontSize="large"
+            className="font-semibold text-xl"
+            sx={{ cursor: "default" }}
+          />
         </Box>
       </Box>
-    </>
+    </PageContainer>
   );
 };
 
