@@ -107,7 +107,7 @@ const Dashboard = () => {
       </Box>
 
       <Box className={"flex mt-16"}>
-        <Box className={"flex w-2/3 bg-red-200"}>
+        <Box className={"flex w-2/3"}>
           <Button
             className={"w-full"}
             color={"primary"}

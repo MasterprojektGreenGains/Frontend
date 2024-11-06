@@ -7,6 +7,8 @@ type Props = {
   color?: "primary" | "secondary";
   fontSize?: "small" | "medium" | "large" | "inherit";
   sx?: object;
+  onClick?: () => void;
+  disableRipple?: boolean;
   className?: string;
 };
 
@@ -17,13 +19,20 @@ const MuiIconButtonWithLabel = ({
   fontSize = "small",
   sx,
   className,
+  onClick,
+  disableRipple
 }: Props) => {
+
   return (
     <div className={"flex items-center"}>
-      <IconButton color={color} disableRipple sx={sx} >
-        <IconComponent fontSize={fontSize}/>
+      <IconButton color={color} sx={sx} onClick={onClick} disableRipple={disableRipple}>
+        <IconComponent fontSize={fontSize} />
       </IconButton>
-      <div className={className}>{text}</div>
+      {color === "secondary" ? (
+        <div className={`text-[#1976d2] ${className}`}>{text}</div>
+      ) : (
+        <div className={className}>{text}</div>
+      )}
     </div>
   );
 };

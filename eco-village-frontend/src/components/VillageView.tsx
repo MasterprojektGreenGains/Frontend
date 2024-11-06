@@ -120,7 +120,9 @@ const VillageView = ({ fields, setFields }: Props) => {
         );
       })}
 
-      {fields.map(({ id, building }) => {
+      {fields
+      // .filter(({ id }) => id === clickedArea)
+      .map(({ id, building }) => {
         const dimensions = getFieldDimensions(id);
         if (!dimensions || !building) return null;
         const { x, y } = dimensions;

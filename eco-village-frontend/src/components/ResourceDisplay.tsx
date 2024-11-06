@@ -30,24 +30,28 @@ const ResourceDisplay = ({ coins, coinStorageCapacity, energy, ecoCredits, villa
         icon={WbSunnyIcon}
         text={energy}
         sx={{ cursor: "default" }}
+        disableRipple
       />
 
       <MuiIconButtonWithLabel
         icon={LocalFloristIcon}
         text={ecoCredits}
         sx={{ cursor: "default" }}
+        disableRipple
       />
 
       <MuiIconButtonWithLabel
         icon={HouseIcon}
         text={villages}
         sx={{ cursor: "default" }}
+        disableRipple
       />
 
       <MuiIconButtonWithLabel
         icon={PeopleIcon}
         text={population}
         sx={{ cursor: "default" }}
+        disableRipple
       />
     </Box>
   );
