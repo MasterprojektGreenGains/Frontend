@@ -12,9 +12,30 @@ export type FieldDimensions = {
     h: number,
 }
 
+export type Cost = {
+    coins?: string,
+    energy?: string,
+    ecoCredits?: string,
+}
+
+export type Consumption = {
+    energy: string
+}
+
+export type Benefit = {
+    residents?: string,
+    energy?: string,
+}   
+
+
 export type Building = {
     type: "windTurbine" | "house" | "ecoCommandCenter"
     level: number,
+    name?: string,
     description?: string,
-    url?: string
+    imageUrl?: string
+    cost?: Cost,
+    consumption?: Consumption,
+    benefit?: Benefit,
+    maxBuilt?: number,
 }
