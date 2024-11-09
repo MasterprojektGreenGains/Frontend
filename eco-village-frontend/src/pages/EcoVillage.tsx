@@ -93,10 +93,12 @@ const EcoVillage = () => {
               </div>
             </Box>
           </Box>
+
           <Box className={"flex"}>
             <VillageView fields={fields} setFields={setFields} />
           </Box>
         </Box>
+
         <Box className="w-1/2 mt-28 pl-16">
           <Box>
             <Box className={"flex justify-evenly"}>
@@ -116,6 +118,7 @@ const EcoVillage = () => {
               </Box>
             </Box>
           </Box>
+
           <Box className={"mt-16"}>
             <MissionOverviewDisplay
               shortMission={shortMission}
@@ -123,6 +126,7 @@ const EcoVillage = () => {
               eventMission={eventMission}
             />
           </Box>
+
           <Box className={"mt-16"}>
             <AchievementOverviewDisplay
               singleEarnedBadges={singleEarnedBadges}
@@ -130,6 +134,7 @@ const EcoVillage = () => {
               skinsAndWidgets={skinsAndWidgets}
             />
           </Box>
+          
           <Box className={"pl-2 mt-8"}>
             <Box className={"flex items-center"}>
               <Button

@@ -20,6 +20,7 @@ const EnergyProductionDisplay = ({
         fontSize="large"
         className={"font-bold text-lg"}
         sx={{ cursor: "default" }}
+        disableRipple
       />
       <div className={"flex"}>
         <span className={"font-bold pl-4 w-1/4"}>{producedEnergy}</span>
