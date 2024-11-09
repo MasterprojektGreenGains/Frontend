@@ -20,13 +20,31 @@ type Props = {
 };
 
 const VillageView = ({ fields, setFields }: Props) => {
-  const [clickedArea, setClickedArea] = useState("");
+  const [clickedFieldId, setClickedFieldId] = useState("");
+  const [action, setAction] = useState<
+    "none" | "construct" | "upgrade" | "view"
+  >("none");
   const [scalingFactor, setScalingFactor] = useState({ scaleX: 1, scaleY: 1 });
   const imageRef = useRef<HTMLImageElement>(null);
 
+  useEffect(() => {
+    const updateScalingFactor = () => {
+      if (imageRef.current) {
+        const { width, height } = imageRef.current.getBoundingClientRect();
+        setScalingFactor({
+          scaleX: width / villageImageSize.w,
+          scaleY: height / villageImageSize.h,
+        });
+      }
+    };
+    updateScalingFactor();
+    window.addEventListener("resize", updateScalingFactor);
+    return () => window.removeEventListener("resize", updateScalingFactor);
+  }, []);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setClickedFieldId(""); setOpen(false);};
 
   const modalStyle = {
     position: "absolute",
@@ -82,7 +100,7 @@ const VillageView = ({ fields, setFields }: Props) => {
       imageUrl: basicWindTurbine,
       cost: { coins: "20" },
       benefit: { energy: "8" },
-      maxBuilt: 6
+      maxBuilt: 6,
     },
     {
       type: "windTurbine",
@@ -120,7 +138,7 @@ const VillageView = ({ fields, setFields }: Props) => {
       cost: { coins: "30" },
       consumption: { energy: "24" },
       benefit: { residents: "2" },
-      maxBuilt: 10
+      maxBuilt: 10,
     },
     {
       type: "house",
@@ -149,21 +167,6 @@ const VillageView = ({ fields, setFields }: Props) => {
       (type === "house" || type === "windTurbine") && level === 1
   );
 
-  useEffect(() => {
-    const updateScalingFactor = () => {
-      if (imageRef.current) {
-        const { width, height } = imageRef.current.getBoundingClientRect();
-        setScalingFactor({
-          scaleX: width / villageImageSize.w,
-          scaleY: height / villageImageSize.h,
-        });
-      }
-    };
-    updateScalingFactor();
-    window.addEventListener("resize", updateScalingFactor);
-    return () => window.removeEventListener("resize", updateScalingFactor);
-  }, []);
-
   const getPositionStyle = (
     originalX: number,
     originalY: number,
@@ -178,39 +181,87 @@ const VillageView = ({ fields, setFields }: Props) => {
     pointerEvents: "auto",
   });
 
-  const getBuildingData = (building: Building) =>
+  const getBuildingData = (buildingToConstruct: Building) =>
     buildings.find(
-      ({ type, level }) => building.type === type && building.level === level
+      ({ type, level }) =>
+        buildingToConstruct.type === type && buildingToConstruct.level === level
     );
 
   const getFieldDimensions = (fieldId: string) =>
     fieldDimensions.find(({ fieldId: id }) => fieldId === id);
 
-  const handleConstruct = (buildingToConstruct: string) => {
-    alert("constructing " + buildingToConstruct + "at position: " + clickedArea);
+  const handleConstruct = (buildingToConstruct: Building) => {
+    const newFields: Field[] = fields.map((field) => {
+      if (field.id === clickedFieldId) {
+        const newField: Field = {
+          id: field.id,
+          building: { type: buildingToConstruct.type, level: 1 },
+        };
+        return newField;
+      }
+      return field;
+    });
+    setFields(newFields);
+    handleClose();
+  };
+
+  const determineMaxLevel = (building: Building) => {
+    const buildingsOfType = buildings.filter(
+      ({ type }) => type === building.type
+    );
+    return buildingsOfType.length;
+  };
+
+  const determineAction = (fieldId: string) => {
+    const field = fields.find(({ id }) => fieldId === id);
+    if (!field) return "none";
+    if (!field.building) return "construct";
+    const maxLevel = determineMaxLevel(field.building);
+    return field.building.level < maxLevel ? "upgrade" : "view";
+  };
+
+  const determineBuiltCount = (building: Building) => {
+    return fields.filter((field) => field.building?.type === building.type)
+      .length;
   };
 
   return (
     <>
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalStyle}>
-          <p className="text-2xl text-gray-700 font-semibold tracking-wide">
-            Construct New Building
-          </p>
-          <hr className="border-black border-t-2 mt-6 mb-6" />
-          {constructionBuildings.map(({ type, name, description, imageUrl, cost, benefit, maxBuilt }) => (
-            <ConstructionBuildingCard
-              key={name}
-              handleClose={handleClose}
-              name={name ? name : ""}
-              description={description ? description : ""}
-              imageUrl={imageUrl ? imageUrl : ""}
-              cost={cost ? cost : {}}
-              maxBuilt={maxBuilt ? maxBuilt : 0}
-              builtCount={0}
-              onConstruct={handleConstruct}
-            />
-          ))}
+          {action === "construct" && (
+            <>
+              <p className="text-2xl text-gray-700 font-semibold tracking-wide">
+                Construct New Building
+              </p>
+              <hr className="border-black border-t-2 mt-6 mb-6" />
+              {constructionBuildings.map((building) => (
+                <ConstructionBuildingCard
+                  key={building.name}
+                  building={building}
+                  builtCount={determineBuiltCount(building)}
+                  handleClose={handleClose}
+                  onConstruct={handleConstruct}
+                />
+              ))}
+            </>
+          )}
+          {action === "upgrade" && (
+            <>
+              <p className="text-2xl text-gray-700 font-semibold tracking-wide">
+                Upgrade Building
+              </p>
+              <hr className="border-black border-t-2 mt-6 mb-6" />
+            </>
+          )}
+          {action === "view" && (
+            <>
+              <p className="text-2xl text-gray-700 font-semibold tracking-wide">
+                View Building
+              </p>
+              <hr className="border-black border-t-2 mt-6 mb-6" />
+            </>
+          )}
         </Box>
       </Modal>
 
@@ -230,7 +281,8 @@ const VillageView = ({ fields, setFields }: Props) => {
               <div
                 key={id}
                 onClick={() => {
-                  setClickedArea(id);
+                  setClickedFieldId(id);
+                  setAction(determineAction(id));
                   handleOpen();
                 }}
                 style={getPositionStyle(
@@ -240,40 +292,39 @@ const VillageView = ({ fields, setFields }: Props) => {
                   dimensions.h
                 )}
                 className={`cursor-pointer z-10 ${
-                  clickedArea === id ? "border-4 border-red-500" : ""
+                  clickedFieldId === id ? "border-4 border-red-500" : ""
                 }`}
               />
             )
           );
         })}
-
-        {fields
-          .map(({ id, building }) => {
-            const dimensions = getFieldDimensions(id);
-            if (!dimensions || !building) return null;
-            const { x, y } = dimensions;
-            const buildingData = getBuildingData(building);
-            const width =
-              id !== "centerField" ? buildingSize.w : centerBuildingSize.w;
-            const height =
-              id !== "centerField" ? buildingSize.h : centerBuildingSize.h;
-            return (
-              buildingData && (
-                <img
-                  key={id}
-                  src={buildingData.imageUrl}
-                  title={buildingData.name}
-                  alt="building"
-                  style={getPositionStyle(
-                    x + centerImageXCorrection,
-                    y,
-                    width,
-                    height
-                  )}
-                />
-              )
-            );
-          })}
+        
+        {fields.map(({ id, building }) => {
+          const dimensions = getFieldDimensions(id);
+          if (!dimensions || !building) return null;
+          const { x, y } = dimensions;
+          const buildingData = getBuildingData(building);
+          const width =
+            id !== "centerField" ? buildingSize.w : centerBuildingSize.w;
+          const height =
+            id !== "centerField" ? buildingSize.h : centerBuildingSize.h;
+          return (
+            buildingData && (
+              <img
+                key={id}
+                src={buildingData.imageUrl}
+                title={buildingData.name}
+                alt="building"
+                style={getPositionStyle(
+                  x + centerImageXCorrection,
+                  y,
+                  width,
+                  height
+                )}
+              />
+            )
+          );
+        })}
       </div>
     </>
   );
